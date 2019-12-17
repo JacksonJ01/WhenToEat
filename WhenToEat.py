@@ -1,6 +1,7 @@
 # Jackson J.
 # 12/11/19
 # This will tell me when I should eat, how many meals i should eat and the portion size, given that amount
+
 from random import *
 
 input("*Click Here Then Press Enter*")
@@ -56,3 +57,40 @@ else:
                 print("Well someone has their life together"
                       "\n🤷")
                 quit()
+            else:
+                while go != "Yes" or go != "Y" or go != "No" or go != "N":
+                    go = input("Do you want to continue?"
+                               "\n>>>").title()
+                    if go == "Yes" or go == "Y":
+                        print("Lettuce continue then")
+                        break
+                    elif go == "No" or go == "N":
+                        print("Okay, have fun, party pooper")
+                        exit()
+
+print("Okay, so in this program, the more meals you have in a day, the smaller the portions")
+input("Press Enter")
+meals = randint(1, 4)
+print("Looks like you'll have " + str(meals) + " for the day")
+happy = input("Are you happy with this number"
+              "\n>>>").title()
+if happy == "Yes" or happy == "Y":
+    print("Good")
+elif happy == "No" or happy == "N":
+    while happy != "Yes" or happy != "Y":
+        meals = randint(1, 4)
+        happy = input(f"Your new number is {meals}"
+                      f"\nAre happy with this number?"
+                      f"\n>>>").title()
+        if happy == "Yes" or happy == "Y":
+            print("Good")
+            break
+
+if meals == 1:
+    print("1")
+elif meals == 2:
+    print("2")
+elif meals == 3:
+    print("3")
+elif meals == 4:
+    print("4")
