@@ -1,8 +1,45 @@
 # Jackson J.
 # 12/11/19
 # This will tell me when I should eat, how many meals i should eat and the portion size, given that amount
-
 from random import *
+Meals = {}
+meals1 = []
+
+
+def rules():
+    print("Now remember, you can't merge or split up your meals"
+          "\n4 meals means four 1/2 plates, not 2 meals and 2 plates..."
+          "\nMathematically yes, but not here")
+
+
+def eat():
+    print(meals1[0])
+    Meals["Breakfast"] = input("Do you want to eat Breakfast?"
+                               "\n>>>").title()
+    Meals["Lunch"] = input("What about Lunch?"
+                           "\n>>>").title()
+    Meals["Dinner"] = input("And is Dinner on the table"
+                            "\n>>>")
+    if Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y"\
+            and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y"\
+            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
+        print("")
+    elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y"\
+            and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y":
+        print("")
+    elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y"\
+            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
+        print("")
+    elif Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y"\
+            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
+        print("")
+    elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y":
+        print("")
+    elif Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y":
+        print("")
+    elif Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
+        print("")
+
 
 input("*Click Here Then Press Enter*")
 
@@ -44,6 +81,7 @@ else:
                        "\n>>>").title()
         if decide == "Yes" or decide == "Y":
             print("Lettuce continue then")
+            break
         elif decide == "No" or decide == "N":
             why = input("So why are you participating in the running of my program?"
                         "\n>>>")
@@ -83,14 +121,36 @@ elif happy == "No" or happy == "N":
                       f"\nAre happy with this number?"
                       f"\n>>>").title()
         if happy == "Yes" or happy == "Y":
-            print("Good")
+            print(f"Good,", meals, "it is")
             break
 
 if meals == 1:
-    print("1")
+    print("You will need to eat a bigger meal for today"
+          "\nTwo plates of food doesn't sound like much but you shouldn't over eat")
+    meals1.append(1)
 elif meals == 2:
-    print("2")
+    print("For each meal you should eat one plate of food")
+    meals1.append(2)
 elif meals == 3:
-    print("3")
+    print("2/3 a plate to 3/4 of a plate for your meals")
+    meals1.append(3)
 elif meals == 4:
-    print("4")
+    print("You will need to eat smaller meals today"
+          "\n1/2 a plate maximum for each meal")
+    meals1.append(4)
+
+when = input("Do you also need to know when to eat?"
+             "\n>>>").title()
+if when == "Yes" or when == "Y":
+    eat()
+elif when == "No" or when == "N":
+    print("Alright then, I will now end the program")
+    exit()
+else:
+    while when != "Yes" or when != "Y" or when != "No" or when != "N":
+        when = input("Do you want to know when to eat?"
+                     "\n>>>").title()
+        if when == "Yes" or when == "Y":
+            eat()
+        elif when == "No" or when == "N":
+            print("Okay then")
