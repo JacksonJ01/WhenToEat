@@ -9,13 +9,16 @@ meals1 = []
 def rules():
     print("You can't merge or split up your meals."
           "\n4 meals means four 1/2 plates, not 2 meals and the associated 2 plates..."
-          "\nMathematically yes, but not here.")
+          "\nMathematically yes, but not here."
+          "\nYou should go to 'Number Of Meals' first"
+          "\nYou will be unable to access the When To Eat if you haven't been given meals")
     input("Press Enter")
 
 
 def number_of_meals():
+    meals1.clear()
     input("Press Enter")
-    meals = randint(1, 4)
+    meals = randint(1, 3)
     print("Looks like you'll have " + str(meals) + " for the day.")
     happy = input("Are you happy with this number."
                   "\n>>>").title()
@@ -23,7 +26,7 @@ def number_of_meals():
         print("Good.")
     elif happy == "No" or happy == "N":
         while happy != "Yes" or happy != "Y":
-            meals = randint(1, 4)
+            meals = randint(1, )
             happy = input(f"Your new number is {meals} meals."
                           f"\nAre happy with this number?"
                           f"\n>>>").title()
@@ -41,14 +44,10 @@ def number_of_meals():
     elif meals == 3:
         print("2/3 a plate to 3/4 of a plate for your meals.")
         meals1.append(3)
-    elif meals == 4:
-        print("You will need to eat smaller meals today."
-              "\n1/2 a plate maximum for each meal")
-        meals1.append(4)
 
 
 def when_to_eat():
-    print(meals1[0])
+    print("You have " + str(meals1[0]) + " meals for today")
     Meals["Breakfast"] = input("Do you want to eat Breakfast?"
                                "\n>>>").title()
     Meals["Lunch"] = input("What about Lunch?"
@@ -91,8 +90,10 @@ def interface():
         interface()
     elif do == "Number Of Meals" or do == "Number" or do == "Of" or do == "Meals" or do == "N" or do == "O" or do == "M":
         number_of_meals()
+        interface()
     elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E":
         when_to_eat()
+        interface()
     elif do == "Exit":
         print("See you later.")
         exit()
@@ -135,6 +136,7 @@ elif decide == "No" or decide == "N":
 else:
     while decide != "Yes" or decide != "Y" or decide != "No" or decide != "N":
         decide = input("Can you repeat that?"
+                       "Can you not decide what to eat?"
                        "\n>>>").title()
         if decide == "Yes" or decide == "Y":
             print("Lettuce continue then.")
@@ -162,5 +164,6 @@ else:
                     elif go == "No" or go == "N":
                         print("Okay, have fun, party pooper.")
                         exit()
-
+print("Before I take you to my interface, I advise you to check the rules first.")
+input("Press Enter")
 interface()
