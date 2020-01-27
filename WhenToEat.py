@@ -91,12 +91,16 @@ def interface():
     elif do == "Number Of Meals" or do == "Number" or do == "Of" or do == "Meals" or do == "N" or do == "O" or do == "M":
         number_of_meals()
         interface()
-    elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E":
+    elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E"\
+            and meals1[0] == 1 or meals1[0] == 2 or meals1[0] == 3:
         when_to_eat()
         interface()
     elif do == "Exit":
         print("See you later.")
         exit()
+    elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E"\
+            and meals1[0] != int:
+        print("Woah there buddy, you don't have anything in your meals")
 
 
 input("*Click Here Then Press Enter*")
@@ -136,7 +140,7 @@ elif decide == "No" or decide == "N":
 else:
     while decide != "Yes" or decide != "Y" or decide != "No" or decide != "N":
         decide = input("Can you repeat that?"
-                       "Can you not decide what to eat?"
+                       "\nCan you not decide what to eat?"
                        "\n>>>").title()
         if decide == "Yes" or decide == "Y":
             print("Lettuce continue then.")
