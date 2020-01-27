@@ -2,6 +2,7 @@
 # 12/11/19
 # This will tell me when I should eat, how many meals i should eat and the portion size, given that amount
 from random import *
+
 Meals = {}
 meals1 = []
 
@@ -54,17 +55,17 @@ def when_to_eat():
                            "\n>>>").title()
     Meals["Dinner"] = input("And is Dinner on the table."
                             "\n>>>").title()
-    if Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y"\
-            and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y"\
+    if Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
+            and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y" \
             and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
         print("")
-    elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y"\
+    elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
             and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y":
         print("")
-    elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y"\
+    elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
             and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
         print("")
-    elif Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y"\
+    elif Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y" \
             and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
         print("")
     elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y":
@@ -82,7 +83,7 @@ def interface():
                "\n-Number Of Meals"
                "\n-When To Eat"
                "\n-Exit"
-               "\n\n>>>").title()
+               "\n>>>").title()
 
     if do == "Rules" or do == "R":
         print("Okay, here are the rules.")
@@ -91,16 +92,22 @@ def interface():
     elif do == "Number Of Meals" or do == "Number" or do == "Of" or do == "Meals" or do == "N" or do == "O" or do == "M":
         number_of_meals()
         interface()
-    elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E"\
-            and meals1[0] == 1 or meals1[0] == 2 or meals1[0] == 3:
+    elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E" \
+            and meals1[0] == int:
         when_to_eat()
         interface()
-    elif do == "Exit":
+    elif do == "Exit" or do == "Ex":
         print("See you later.")
         exit()
-    elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E"\
+    elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E" \
             and meals1[0] != int:
         print("Woah there buddy, you don't have anything in your meals")
+    elif do != "Rules" or do != "R" \
+            or do != "Number Of Meals" or do != "Number" or do != "Of" or do != "Meals" or do != "N" or do != "O" or do != "M" \
+            or do != "When To Eat" or do != "When" or do != "To" or do != "Eat" or do != "W" or do != "T" or do != "E" \
+            or do != "Exit" or do != "Ex":
+        print("Choose again")
+        interface()
 
 
 input("*Click Here Then Press Enter*")
