@@ -121,20 +121,22 @@ if decide == "Yes" or decide == "Y":
     print("Well you've come to the right place."
           "\nLettuce continue.")
 elif decide == "No" or decide == "N":
-    why = input("So why are you participating in the running of my program?"
-                "\n>>>")
+    input("So why are you participating in the running of my program?"
+          "\n>>>")
     go = input("Ahh, okay then."
                "\nDo you still want to continue with my program?"
                "\n>>>").title()
     if go == "Yes" or go == "Y":
-        print("Cool, lettuce continue.")
+        print("Cool, lettuce continue."
+              "\n*Ahem*")
     elif go == "No" or go == "N":
-        print("Well someone has their life together."
+        print("Well, someone has their life together."
               "\n🤷")
         exit()
     else:
         while go != "Yes" or go != "Y" or go != "No" or go != "N":
             go = input("Can you repeat that?"
+                       "\nDo you want to continue?"
                        "\n>>>").title()
             if go == "Yes" or go == "Y":
                 print("Ahh, well you've come to the right place."
@@ -147,14 +149,14 @@ elif decide == "No" or decide == "N":
 else:
     while decide != "Yes" or decide != "Y" or decide != "No" or decide != "N":
         decide = input("Can you repeat that?"
-                       "\nCan you not decide what to eat?"
+                       "\nCan you not decide when to eat?"
                        "\n>>>").title()
         if decide == "Yes" or decide == "Y":
             print("Lettuce continue then.")
             break
         elif decide == "No" or decide == "N":
-            why = input("So why are you participating in the running of my program?"
-                        "\n>>>")
+            input("So why are you participating in the running of my program?"
+                  "\n>>>").title()
             go = input("Ahh, okay then."
                        "\nDo you still want to continue with my program?"
                        "\n>>>").title()
@@ -167,7 +169,7 @@ else:
                 quit()
             else:
                 while go != "Yes" or go != "Y" or go != "No" or go != "N":
-                    go = input("Do you want to continue?"
+                    go = input("Do you want to continue with my program?"
                                "\n>>>").title()
                     if go == "Yes" or go == "Y":
                         print("Lettuce continue then.")
@@ -175,6 +177,7 @@ else:
                     elif go == "No" or go == "N":
                         print("Okay, have fun, party pooper.")
                         exit()
+                break
 print("Before I take you to my interface, I advise you to check the rules first.")
 input("Press Enter")
 interface()
