@@ -76,10 +76,8 @@ def user():
                     break
     print("Before I take you to my interface, I advise you to check the rules first.")
     input("Press Enter")
+    interface()
     return name
-
-
-name1 = user()
 
 
 def rules():
@@ -215,5 +213,4 @@ def interface():
 
 
 input("*Click Here Then Press Enter*")
-user()
-interface()
+name1 = user()
