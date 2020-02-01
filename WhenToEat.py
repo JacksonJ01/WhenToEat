@@ -5,6 +5,7 @@ from random import *
 
 Meals = {}
 meals1 = []
+name1 = []
 
 
 def user():
@@ -74,10 +75,10 @@ def user():
                             print("Okay, have fun, party pooper.")
                             exit()
                     break
+    name1.append(name)
     print("Before I take you to my interface, I advise you to check the rules first.")
     input("Press Enter")
     interface()
-    return name
 
 
 def rules():
@@ -91,7 +92,6 @@ def rules():
 
 def number_of_meals():
     meals1.clear()
-    input("Press Enter")
     if name1 == "J" or name1 == "Jared":
         meals = randint(1, 2)
         if meals == 1:
@@ -145,7 +145,7 @@ def number_of_meals():
 
 
 def when_to_eat():
-    print("You have " + str(meals1[0]) + " meals for today")
+    print("Okay, ", name1, ", you have " + str(meals1[0]) + " meal(s) for today")
     Meals["Breakfast"] = input("Do you want to eat Breakfast?"
                                "\n>>>").title()
     Meals["Lunch"] = input("What about Lunch?"
@@ -171,10 +171,12 @@ def when_to_eat():
         print("")
     elif Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
         print("")
+    interface()
 
 
 def interface():
-    print("\nINTERFACE")
+    print("\nINTERFACE"
+          f"", name1, "\b\b")
     do = input("What do you want to do?"
                "\n-Rules"
                "\n-Number Of Meals"
@@ -196,6 +198,7 @@ def interface():
         interface()
     elif do == "New User" or do == "New" or do == "User" or do == "Ne" or do == "U":
         print("Ahh, A new user?")
+        name1.clear()
         user()
     elif do == "Exit" or do == "Ex":
         print("See you later.")
@@ -213,4 +216,4 @@ def interface():
 
 
 input("*Click Here Then Press Enter*")
-name1 = user()
+user()
