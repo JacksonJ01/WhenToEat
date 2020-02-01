@@ -1,5 +1,5 @@
 # Jackson J.
-# 12/11/19
+# 12/11/19 - 2/1/2020
 # This will tell me when I should eat, how many meals i should eat and the portion size, given that amount
 from random import *
 
