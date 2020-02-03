@@ -1,5 +1,5 @@
 # Jackson J.
-# 12/11/19 - 2/1/2020
+# 12/11/19 - 2/3/2020
 # This will tell me when I should eat, how many meals i should eat and the portion size, given that amount
 from random import *
 
@@ -123,7 +123,8 @@ def number_of_meals():
                   "\n>>>").title()
 
     if happy == "Yes" or happy == "Y":
-        print("Good.")
+        print("Good...")
+        meals1.append(meals)
 
     elif happy == "No" or happy == "N":
 
@@ -137,6 +138,7 @@ def number_of_meals():
 
                 if happy == "Yes" or happy == "Y":
                     print(f"Good,", meals, " meals it is.")
+                    meals1.append(meals)
                     break
 
                 else:
@@ -149,47 +151,40 @@ def number_of_meals():
 
                 if happy == "Yes" or happy == "Y":
                     print(f"Good,", meals, " meal it is.")
+                    meals1.append(meals)
                     break
 
                 else:
                     print('Let\'s try again then.')
 
-    if meals1[0] == 3 and name1[0] == "Jared" or name1[0] == "J":
+    if meals == 3 and name1[0] == "Jared" or meals == 3 and name1[0] == "J":
+
         past = input("Woah there."
                      "\nYou thought I wouldn't realize?"
                      "\nYou only have 14 meal passes per week."
                      "\nI'm gonna run this program back."
                      "\nYou can only have a maximum of 2 meals a day, unless of course you've gotten the one meal option this week.."
-                     "\n\nDid you eat one meal this past week?").title()
+                     "\n\nDid you eat one meal this past week?"
+                     "\n>>>").title()
 
-        if past == "Yes":
+        if past == "Yes" or past == "Y":
             print("Fine, I guess it's okay for you to have three meals today")
 
-        elif past == "No":
+        elif past == "No" or past == "N":
             print("Well then.."
                   "\nLooks like you'll have to get a new number, and you'll have to stick with it.")
             meals = randint(1, 2)
             if meals == 1:
                 print("Now you have 1 meal")
+                meals1.append(meals)
 
             elif meals == 2:
                 print("Now you have 2 meals")
-
-    if meals == 1:
-        print("You will need to eat a bigger meal for today."
-              "\nTwo plates of food doesn't sound like much but you shouldn't over eat.")
-        meals1.append(1)
-
-    elif meals == 2:
-        print("For each meal you should eat one plate of food.")
-        meals1.append(2)
-
-    elif meals == 3:
-        print("2/3 a plate to 3/4 of a plate for your meals.")
-        meals1.append(3)
+                meals1.append(meals)
 
 
 def when_to_eat():
+    Meals.clear()
     print("Okay, ", name1[0], ", you have " + str(meals1[0]) + " meal(s) for today")
     Meals["Breakfast"] = input("Do you want to eat Breakfast?"
                                "\n>>>").title()
@@ -234,7 +229,7 @@ def when_to_eat():
 
 def interface():
     print("\nINTERFACE")
-    do = input("What do you want to do?"
+    do = input("What do you want to do? Type the FIRST letter"
                "\n-Rules"
                "\n-Number Of Meals"
                "\n-When To Eat"
@@ -251,17 +246,18 @@ def interface():
         number_of_meals()
         interface()
 
-    elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E" \
-            and meals1[0] != 1 or meals1[0] != 2 or meals1[0] != 3:
-        print("Woah there buddy, you don't have anything in your meals"
-              "\nLet me help you with that"
-              "\n ")
-        number_of_meals()
-
-    elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E" \
-            and meals1[0]:
+    elif meals1[0] == 1 and do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E":
         when_to_eat()
-        interface()
+
+    elif meals1[0] == 2 and do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E":
+        when_to_eat()
+
+    elif meals1[0] == 3 and do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E":
+        when_to_eat()
+
+    elif meals1[0] == int and do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E":
+        print("You need to go to the number of meals first")
+        number_of_meals()
 
     elif do == "New User" or do == "New" or do == "User" or do == "Ne" or do == "U":
         print("Ahh, A new user?")
