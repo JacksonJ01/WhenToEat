@@ -154,7 +154,7 @@ def number_of_meals():
                 else:
                     print('Let\'s try again then.')
 
-    if name1[0] == "Jared" or name1[0] == "J" and meals1 == 3:
+    if meals1[0] == 3 and name1[0] == "Jared" or name1[0] == "J":
         past = input("Woah there."
                      "\nYou thought I wouldn't realize?"
                      "\nYou only have 14 meal passes per week."
@@ -169,6 +169,11 @@ def number_of_meals():
             print("Well then.."
                   "\nLooks like you'll have to get a new number, and you'll have to stick with it.")
             meals = randint(1, 2)
+            if meals == 1:
+                print("Now you have 1 meal")
+
+            elif meals == 2:
+                print("Now you have 2 meals")
 
     if meals == 1:
         print("You will need to eat a bigger meal for today."
@@ -195,7 +200,12 @@ def when_to_eat():
 
     if Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
             and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y" \
-            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
+            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y" and meals1[0] == 3:
+        print("Okay, you have three meals, so you can do this")
+
+    elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
+            and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y" \
+            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y" and meals1[0] == 3:
         print("")
 
     elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
@@ -244,11 +254,12 @@ def interface():
     elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E" \
             and meals1[0] != 1 or meals1[0] != 2 or meals1[0] != 3:
         print("Woah there buddy, you don't have anything in your meals"
-              "\nLet me help you with that")
+              "\nLet me help you with that"
+              "\n ")
         number_of_meals()
 
     elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E" \
-            and meals1[0] == int:
+            and meals1[0]:
         when_to_eat()
         interface()
 
