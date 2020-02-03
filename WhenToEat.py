@@ -184,6 +184,10 @@ def number_of_meals():
 
 
 def when_to_eat():
+    if meals1[0] != 1 or meals1[0] != 2 or meals1[0] != 3:
+        print("You can't come here yet")
+        interface()
+
     Meals.clear()
     print("Okay, ", name1[0], ", you have " + str(meals1[0]) + " meal(s) for today")
     Meals["Breakfast"] = input("Do you want to eat Breakfast?"
@@ -200,8 +204,9 @@ def when_to_eat():
 
     elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
             and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y" \
-            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y" and meals1[0] == 3:
-        print("")
+            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y" and meals1[0] != 3:
+        print("You don't have three meals!"
+              "\n You can't do this")
 
     elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
             and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y":
@@ -242,37 +247,27 @@ def interface():
         rules()
         interface()
 
-    elif do == "Number Of Meals" or do == "Number" or do == "Of" or do == "Meals" or do == "Nu" or do == "O" or do == "M":
+    elif do == "Number Of Meals" or do == "Number" or do == "Of" or do == "Meals" or do == "N" or do == "O" or do == "M" or do == "Nom":
         number_of_meals()
         interface()
 
-    elif meals1[0] == 1 and do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E":
+    elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "Wte":
         when_to_eat()
 
-    elif meals1[0] == 2 and do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E":
-        when_to_eat()
-
-    elif meals1[0] == 3 and do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E":
-        when_to_eat()
-
-    elif meals1[0] == int and do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "E":
-        print("You need to go to the number of meals first")
-        number_of_meals()
-
-    elif do == "New User" or do == "New" or do == "User" or do == "Ne" or do == "U":
+    elif do == "New User" or do == "New" or do == "User" or do == "Ne" or do == "U" or do == "Nu":
         print("Ahh, A new user?")
         name1.clear()
         user()
 
-    elif do == "Exit" or do == "Ex":
+    elif do == "Exit" or do == "E":
         print("See you later.")
         exit()
 
     elif do != "Rules" or do != "R" \
-            or do != "Number Of Meals" or do != "Number" or do != "Of" or do != "Meals" or do != "Nu" or do != "O" or do != "M" \
-            or do != "When To Eat" or do != "When" or do != "To" or do != "Eat" or do != "W" or do != "T" or do != "E" \
-            or do != "New User" or do != "New" or do != "User" or do != "Ne" or do != "U" \
-            or do != "Exit" or do != "Ex":
+            or do != "Number Of Meals" or do != "Number" or do != "Of" or do != "Meals" or do != "N" or do != "O" or do != "M" or do != "Nom" \
+            or do != "When To Eat" or do != "When" or do != "To" or do != "Eat" or do != "W" or do != "T" or do != "Wte" \
+            or do != "New User" or do != "New" or do != "User" or do != "Ne" or do != "U" or do != "Nu" \
+            or do != "Exit" or do != "E":
         print("Choose again")
         interface()
 
