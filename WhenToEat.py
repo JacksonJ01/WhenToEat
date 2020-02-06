@@ -184,9 +184,6 @@ def number_of_meals():
 
 
 def when_to_eat():
-    if meals1[0] != 1 or meals1[0] != 2 or meals1[0] != 3:
-        print("You can't come here yet")
-        interface()
 
     Meals.clear()
     print("Okay, ", name1[0], ", you have " + str(meals1[0]) + " meal(s) for today")
@@ -199,14 +196,8 @@ def when_to_eat():
 
     if Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
             and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y" \
-            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y" and meals1[0] == 3:
-        print("Okay, you have three meals, so you can do this")
-
-    elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
-            and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y" \
-            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y" and meals1[0] != 3:
-        print("You don't have three meals!"
-              "\n You can't do this")
+            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
+        print("")
 
     elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
             and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y":
@@ -237,7 +228,7 @@ def interface():
     do = input("What do you want to do? Type the FIRST letter"
                "\n-Rules"
                "\n-Number Of Meals"
-               "\n-When To Eat"
+               "\n-When To Eat (Cannot access until Number Of Meals has been completed)"
                "\n-New User"
                "\n-Exit"
                "\n>>>").title()
