@@ -1,267 +1,89 @@
 # Jackson J.
 # 12/11/19 - 2/3/2020
-# This will tell me when I should eat, how many meals i should eat and the portion size, given that amount
-from random import *
+# This will tell me, or other users when I should eat, how many meals i should eat and the portion size, given that amount
+#
+# Ask user some questions in menu format and save the number in a variable:
+# - Name(not formatted)
+# - Time of day
+# - when they last ate
+# - meal or snack
+# - how hungry they are
+# - if exercised today
+# - if no then will
+#
+# Ask what the users intentions are:
+# - Lean
+# - Bulk
+# - Maintain
+#
+# "\n1. 12am - 3am" +   ////
+# "\n2. 3am  - 6am" +   //
+# "\n3. 6am  - 9am" +   //
+# "\n4. 9am  - 12pm" +  ///
+# "\n5. 12pm - 3pm" +   ///
+# "\n6. 3pm  - 6pm" +   ///
+#  "\n7. 6pm  - 9pm" +   ////
+#  "\n8. 9pm  - 12am");  ////
+from NewUser import *
+from ExistingUser import *
 
-Meals = {}
-meals1 = []
-name1 = []
+when = 0
+plates = 0
+calories = 0
+administratorID = 20019417
 
+print(red_bold(under_bold('\n-To navigate this program type the NUMBER next to the choice you want-')))
+input("*Press Enter*")
 
-def user():
-    name1.clear()
-    name = input("Hello user, what is your name?"
-                 "\n>>>").title()
-    print("Nice to meet you " + name)
-    decide = input("Are you here because you can't decide on when to eat?"
-                   "\n>>>").title()
-
-    if decide == "Yes" or decide == "Y":
-        print("Well you've come to the right place."
-              "\nLettuce continue.")
-
-    elif decide == "No" or decide == "N":
-        input("So why are you participating in the running of my program?"
-              "\n>>>")
-        go = input("Ahh, okay then."
-                   "\nDo you still want to continue with my program?"
-                   "\n>>>").title()
-
-        if go == "Yes" or go == "Y":
-            print("Cool, lettuce continue."
-                  "\n*Ahem*")
-
-        elif go == "No" or go == "N":
-            print("Well, someone has their life together."
-                  "\n🤷")
-            exit()
-
-        else:
-
-            while go != "Yes" or go != "Y" or go != "No" or go != "N":
-                go = input("Can you repeat that?"
-                           "\nDo you want to continue?"
-                           "\n>>>").title()
-
-                if go == "Yes" or go == "Y":
-                    print("Ahh, well you've come to the right place."
-                          "\nLettuce continue.")
-                    break
-
-                elif go == "No" or go == "N":
-                    print("Looks like you're all set and good to go."
-                          "\n🤷")
-                    quit()
-
-    else:
-
-        while decide != "Yes" or decide != "Y" or decide != "No" or decide != "N":
-            decide = input("Can you repeat that?"
-                           "\nCan you not decide when to eat?"
-                           "\n>>>").title()
-
-            if decide == "Yes" or decide == "Y":
-                print("Lettuce continue then.")
+# This is the main loop for this program
+# The menu consist the options that will allow the user to create their account in the the database and access that account
+# The admin will be able to view all of the users in the account and remove users if they need to. This can only be accessed with the adminID#
+while True:
+    menu0 = input("\nHello, are you a New User or and Existing User?"
+                  "\n1. New User"
+                  "\n2. Existing User"
+                  "\n3. Administrator"
+                  "\n4. Exit Program"
+                  "\n>>>")
+    while True:
+        try:
+            menu0 = int(menu0)
+            if 0 < menu0 < 5:
                 break
-
-            elif decide == "No" or decide == "N":
-                input("So why are you participating in the running of my program?"
-                      "\n>>>").title()
-                go = input("Ahh, okay then."
-                           "\nDo you still want to continue with my program?"
-                           "\n>>>").title()
-
-                if go == "Yes" or go == "Y":
-                    print("Cool, lettuce continue.")
-                    break
-
-                elif go == "No" or go == "N":
-                    print("Well someone has their life together."
-                          "\n🤷")
-                    quit()
-
-                else:
-
-                    while go != "Yes" or go != "Y" or go != "No" or go != "N":
-                        go = input("Do you want to continue with my program?"
-                                   "\n>>>").title()
-
-                        if go == "Yes" or go == "Y":
-                            print("Lettuce continue then.")
-                            break
-
-                        elif go == "No" or go == "N":
-                            print("Okay, have fun, party pooper.")
-                            exit()
-                    break
-    name1.append(name)
-    print("Before I take you to my interface, I advise you to check the rules first.")
-    input("Press Enter")
-    interface()
-
-
-def rules():
-    print("You can't merge or split up your meals."
-          "\n4 meals means four 1/2 plates, not 2 meals and the associated 2 plates..."
-          "\nMathematically yes, but not here."
-          "\nYou should go to 'Number Of Meals' first"
-          "\nYou will be unable to access the When To Eat if you haven't been given meals")
-    input("Press Enter")
-
-
-def number_of_meals():
-    meals1.clear()
-    meals = randint(1, 3)
-
-    if meals != 1:
-        print("Looks like you'll have " + str(meals) + " meals for the day.")
-
-    else:
-        print(f"Alright {name1[0]}, you will have {meals} meal today.")
-
-    happy = input("Are you happy with this number."
-                  "\n>>>").title()
-
-    if happy == "Yes" or happy == "Y":
-        print("Good...")
-        meals1.append(meals)
-
-    elif happy == "No" or happy == "N":
-
-        while happy != "Yes" or happy != "Y":
-            meals = randint(1, 3)
-
-            if meals != 1:
-                happy = input(f"Your new number is {meals} meals."
-                              f"\nAre happy with this number?"
-                              f"\n>>>").title()
-
-                if happy == "Yes" or happy == "Y":
-                    print(f"Good,", meals, " meals it is.")
-                    meals1.append(meals)
-                    break
-
-                else:
-                    print('Let\'s try again then.')
-
             else:
-                happy = input(f"Your new number is {meals} meal."
-                              f"\nAre happy with this number?"
-                              f"\n>>>").title()
+                int("#ForceFail")
+        except ValueError:
+            menu0 = input(f"\n{red_bold('Press 1')} if you are a New User"
+                          f"\n{red_bold('Press 2')} if you are an Existing User"
+                          f"\n{red_bold('Press 3')} if you are an Admin"
+                          f"\n{red_bold('Press 4')} if you want to Leave"
+                          f"\n>>>")
 
-                if happy == "Yes" or happy == "Y":
-                    print(f"Good,", meals, " meal it is.")
-                    meals1.append(meals)
-                    break
+    if menu0 == 1:
+        newUser()
 
-                else:
-                    print('Let\'s try again then.')
+    elif menu0 == 2:
+        existingUser()
 
-    if meals == 3 and name1[0] == "Jared" or meals == 3 and name1[0] == "J":
+    elif menu0 == 3:
+        adminID = input("\nWhat is the Administrator ID?"
+                        "\n>>>")
 
-        past = input("Woah there."
-                     "\nYou thought I wouldn't realize?"
-                     "\nYou only have 14 meal passes per week."
-                     "\nI'm gonna run this program back."
-                     "\nYou can only have a maximum of 2 meals a day, unless of course you've gotten the one meal option this week.."
-                     "\n\nDid you eat one meal this past week?"
-                     "\n>>>").title()
+        allUsers = "SELECT * FROM userInfo"
+        info = read_table(connecting, allUsers)
+        for data in info:
+            print(data)
 
-        if past == "Yes" or past == "Y":
-            print("Fine, I guess it's okay for you to have three meals today")
+        input("Press enter to delete")
+        input(f"Press enter again to {red_bold('delete')}")
 
-        elif past == "No" or past == "N":
-            print("Well then.."
-                  "\nLooks like you'll have to get a new number, and you'll have to stick with it.")
-            meals = randint(1, 2)
-            if meals == 1:
-                print("Now you have 1 meal")
-                meals1.append(meals)
+        drop_table = """
+        DROP TABLE IF EXISTS
+          userInfo
+        """
+        create_table(connecting, drop_table)
 
-            elif meals == 2:
-                print("Now you have 2 meals")
-                meals1.append(meals)
-
-
-def when_to_eat():
-
-    Meals.clear()
-    print("Okay, ", name1[0], ", you have " + str(meals1[0]) + " meal(s) for today")
-    Meals["Breakfast"] = input("Do you want to eat Breakfast?"
-                               "\n>>>").title()
-    Meals["Lunch"] = input("What about Lunch?"
-                           "\n>>>").title()
-    Meals["Dinner"] = input("And is Dinner on the table."
-                            "\n>>>").title()
-
-    if Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
-            and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y" \
-            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
-        print("")
-
-    elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
-            and Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y":
-        print("")
-
-    elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y" \
-            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
-        print("")
-
-    elif Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y" \
-            and Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
-        print("")
-
-    elif Meals["Breakfast"] == "Yes" or Meals["Breakfast"] == "Y":
-        print("")
-
-    elif Meals["Lunch"] == "Yes" or Meals["Lunch"] == "Y":
-        print("")
-
-    elif Meals["Dinner"] == "Yes" or Meals["Dinner"] == "Y":
-        print("")
-
-    interface()
-
-
-def interface():
-    print("\nINTERFACE")
-    do = input("What do you want to do? Type the FIRST letter"
-               "\n-Rules"
-               "\n-Number Of Meals"
-               "\n-When To Eat (Cannot access until Number Of Meals has been completed)"
-               "\n-New User"
-               "\n-Exit"
-               "\n>>>").title()
-
-    if do == "Rules" or do == "R":
-        print("Okay, here are the rules.")
-        rules()
-        interface()
-
-    elif do == "Number Of Meals" or do == "Number" or do == "Of" or do == "Meals" or do == "N" or do == "O" or do == "M" or do == "Nom":
-        number_of_meals()
-        interface()
-
-    elif do == "When To Eat" or do == "When" or do == "To" or do == "Eat" or do == "W" or do == "T" or do == "Wte":
-        when_to_eat()
-
-    elif do == "New User" or do == "New" or do == "User" or do == "Ne" or do == "U" or do == "Nu":
-        print("Ahh, A new user?")
-        name1.clear()
-        user()
-
-    elif do == "Exit" or do == "E":
-        print("See you later.")
-        exit()
-
-    elif do != "Rules" or do != "R" \
-            or do != "Number Of Meals" or do != "Number" or do != "Of" or do != "Meals" or do != "N" or do != "O" or do != "M" or do != "Nom" \
-            or do != "When To Eat" or do != "When" or do != "To" or do != "Eat" or do != "W" or do != "T" or do != "Wte" \
-            or do != "New User" or do != "New" or do != "User" or do != "Ne" or do != "U" or do != "Nu" \
-            or do != "Exit" or do != "E":
-        print("Choose again")
-        interface()
-
-
-input("*Click Here Then Press Enter*")
-user()
+        allUsers = "SELECT * FROM userInfo"
+        info = read_table(connecting, allUsers)
+        for data in info:
+            print(data)
