@@ -1,4 +1,9 @@
 from Useful_Tools import *
+from time import sleep
+
+
+def s(seconds):
+    sleep(seconds)
 
 
 def secretQ(number=None):

@@ -30,7 +30,7 @@ from ExistingUser import *
 when = 0
 plates = 0
 calories = 0
-administratorID = 20019417
+administratorID = 20019417  # By default this code will be 0000, but it should be changed for security
 
 print(red_bold(under_bold('\n-To navigate this program type the NUMBER next to the choice you want-')))
 input("*Press Enter*")
@@ -39,7 +39,7 @@ input("*Press Enter*")
 # The menu consist the options that will allow the user to create their account in the the database and access that account
 # The admin will be able to view all of the users in the account and remove users if they need to. This can only be accessed with the adminID#
 while True:
-    menu0 = input("\nHello, are you a New User or and Existing User?"
+    menu0 = input("\nHello, are you a New User or an Existing User?"
                   "\n1. New User"
                   "\n2. Existing User"
                   "\n3. Administrator"
@@ -59,31 +59,82 @@ while True:
                           f"\n{red_bold('Press 4')} if you want to Leave"
                           f"\n>>>")
 
+    user = 0
     if menu0 == 1:
-        newUser()
+        user = newUser()
 
     elif menu0 == 2:
-        existingUser()
+        user = existingUser()
+        if user == 1:
+            newUser()
 
     elif menu0 == 3:
-        adminID = input("\nWhat is the Administrator ID?"
+        isAdmin = input("\nWhat is the Administrator ID?"
                         "\n>>>")
+        while True:
+            try:
+                isAdmin = int(isAdmin)
+                if isAdmin == administratorID:
+                    while True:
+                        overseer = input(f"\nADMIN MENU"
+                                         f"\n0. {bold('See All User Info')}"
+                                         f"\n1. {red_bold('DELETE')} {bold('A User')}"
+                                         f"\n2. {red_bold('DELETE ALL USERS')}"
+                                         f"\n3. {bold('Exit Menu')}"
+                                         f"\n>>>")
+                        while True:
+                            try:
+                                overseer = int(overseer)
+                                if 0 <= overseer < 4:
+                                    break
+                                else:
+                                    int("#ForceFail")
+                            except ValueError:
+                                overseer = input(f"\n{red_bold('Press 0')} to see USER INFO"
+                                                 f"\n{red_bold('Press 1')} to {bold(red_bold('DELETE') + ' A User')}"
+                                                 f"\n{red_bold('Press 2')} to {red_bold('DELETE ALL USERS')}"
+                                                 f"\n{red_bold('Press 3')} to Exit this menu"
+                                                 f"\n>>>")
 
-        allUsers = "SELECT * FROM userInfo"
-        info = read_table(connecting, allUsers)
-        for data in info:
-            print(data)
+                        if overseer == 0:
+                            allUsers = "SELECT * FROM userInfo"
+                            info = read_table(connecting, allUsers)
+                            for data in info:
+                                print(data)
 
-        input("Press enter to delete")
-        input(f"Press enter again to {red_bold('delete')}")
+                        elif overseer == 1:
+                            delete = input(f"\nWhat is the {red_bold('PIN NUMBER')} of the account you wish to delete"
+                                           f"\n>>>")
+                            dropAccount = f"""
+                            DELETE FROM
+                              userInfo
+                            WHERE
+                              pinNumber = {delete}
+                            """
+                            try:
+                                deleting = create_table(connecting, dropAccount)
+                            except Error as welp:
+                                print(welp)
 
-        drop_table = """
-        DROP TABLE IF EXISTS
-          userInfo
-        """
-        create_table(connecting, drop_table)
+                        elif overseer == 2:
+                            drop_table = """
+                            DROP TABLE IF EXISTS
+                              userInfo"""
+                            create_table(connecting, drop_table)
 
-        allUsers = "SELECT * FROM userInfo"
-        info = read_table(connecting, allUsers)
-        for data in info:
-            print(data)
+                        elif overseer == 3:
+                            break
+                    break
+                else:
+                    int("#ForceFail")
+            except ValueError:
+                isAdmin = input(f"\n{red_bold('Incorrect PIN NUMBER')}"
+                                "\nTry Again"
+                                "\n>>>")
+
+    elif menu0 == 4:
+        print("Have A Good Day")
+        exit()
+
+    if user != 0:
+        print("")

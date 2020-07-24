@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS
   pinNumber      INTEGER  PRIMARY KEY,
   firstName      TEXT     NOT NULL,
   lastName       TEXT     NOT NULL,
-  email          TEXT     NOT NULL
+  email          TEXT     NOT NULL,
   secretQuestion INTEGER  NOT NULL,
   answer         TEXT     NOT NULL
 );

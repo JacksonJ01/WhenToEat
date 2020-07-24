@@ -13,6 +13,8 @@ def newUser():
           f"\n- An {bold('Answer')} to one of the five {bold('Security Questions')} of your choice"
           f"\n\nA pin number is asked before your name to ensure its {bold('uniqueness and privacy')}."
           f"\nThis number can be as long as you'd like it to be, but there is also a {bold('minimum of 4 characters')}."
+          f"\nShould you forget this pin number, the email you provide will serve as a means to help retrieve your pin"
+          f"\nIf you do not remember the pin number nor the email you linked you can request the Administrator's help"
           f"\n{bold('Press Enter')} when you are ready")
 
     allSet = False
@@ -34,8 +36,7 @@ def newUser():
                     try:
                         pinNum = read_table(connecting, pin)
                         for pin in pinNum:
-                            print(pin)
-                            if pinNumber == pin:
+                            if pinNumber == pin[0]:
                                 print("\nLooks like someone has taken that Pin Number."
                                       "\nTry again")
                                 int("#Force Fail")
@@ -52,13 +53,13 @@ def newUser():
                               "\n>>>")
 
     firstName = input("\nNow, what is your First Name?"
-                      "\n>>>")
+                      "\n>>>").title()
 
     lastName = input("\nAnd your Last Name?"
-                     "\n>>>")
+                     "\n>>>").title()
 
     email = input("\nWhat email would you like to link to this program?"
-                  "\n>>>")
+                  "\n>>>").lower()
 
     secretQ()
     secretQuestion = input(">>>")
@@ -72,12 +73,15 @@ def newUser():
         except ValueError:
             secretQuestion = input(f"Type a {red_bold('number')} between 1 and 5 to pick a Security Question")
 
-    answer = input("\nWhat is the answer to that question?")
+    answer = input("\nWhat is the answer to that question?"
+                   "\n>>>").lower()
 
     # This variable contains the string to add this new person using the variables
     add_person = f"""
     INSERT INTO
       userInfo (pinNumber, firstName, lastName, email, secretQuestion, answer)
     VALUES
-      ('{pinNumber}', '{firstName}', '{lastName}', '{email}' '{secretQuestion}', '{answer}')"""
+      ('{pinNumber}', '{firstName}', '{lastName}', '{email}', '{secretQuestion}', '{answer}')"""
     create_table(connecting, add_person)
+
+    return lastName
