@@ -79,9 +79,9 @@ def newUser():
     # This variable contains the string to add this new person using the variables
     add_person = f"""
     INSERT INTO
-      userInfo (pinNumber, firstName, lastName, email, secretQuestion, answer)
+      userInfo (pinNumber, firstName, lastName, gender, weight, height, bmi, email, secretQuestion, answer, goal, previousDay)
     VALUES
-      ('{pinNumber}', '{firstName}', '{lastName}', '{email}', '{secretQuestion}', '{answer}')"""
+      ('{pinNumber}', '{firstName}', '{lastName}', 'N/A', 'N/A', 'N/A', 'N/A', '{email}', '{secretQuestion}', '{answer}', 'N/A', 'N/A')"""
     create_table(connecting, add_person)
 
     return lastName

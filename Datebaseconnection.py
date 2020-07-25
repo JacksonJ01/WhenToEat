@@ -44,9 +44,15 @@ CREATE TABLE IF NOT EXISTS
   pinNumber      INTEGER  PRIMARY KEY,
   firstName      TEXT     NOT NULL,
   lastName       TEXT     NOT NULL,
+  gender         TEXT,
+  weight         TEXT,
+  height         TEXT,
+  bmi            TEXT,
   email          TEXT     NOT NULL,
   secretQuestion INTEGER  NOT NULL,
-  answer         TEXT     NOT NULL
+  answer         TEXT     NOT NULL,
+  goal           TEXT,
+  previousDay    TEXT
 );
 """
 

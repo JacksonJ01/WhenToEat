@@ -100,7 +100,8 @@ while True:
                             allUsers = "SELECT * FROM userInfo"
                             info = read_table(connecting, allUsers)
                             for data in info:
-                                print(data)
+                                print(f"\nPin Number: {data[0]} | First Name: {data[1]} |Last Name: {data[2]} | Gender: {data[3]} | Weight: {data[4]} | Height: {data[5]} " 
+                                      f"\nBMI: {data[6]} | Email: {data[7]} | Security Question: {data[8]} | Answer: {data[9]} | Goal: {data[10]} | Previous Day: {data[11]}")
 
                         elif overseer == 1:
                             delete = input(f"\nWhat is the {red_bold('PIN NUMBER')} of the account you wish to delete"
