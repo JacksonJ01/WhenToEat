@@ -27,14 +27,23 @@
 #
 # I might add an auto increment to the userInfo table because it will help me keep track of the users files better
 # - I can't make the file name the users name because names are not unique
-# - I can make the user Pin Number the file name, but the pin can be changed,#
+# - I can make the user Pin Number the file name, but the pin can be changed,
+#  -so i would have create a new file with the new pin name, copy the info, and delete the old file
+# - Instead I will create a file column in the table and have it auto increment (I can also make that number a primary key),
+# - then use that number for the file name, but i will probably add "User" in front of it
+# - The admin can remove users from the database, so i will have to also remove the file linked to them
+#  - I can use regular expressions to parse the file that will hold the Existing User file names and I can modify that file to delete
+#  - If I have a temporary variable in the loop that reads the file, I can add the names to it, but when it reaches the file
+#   - "User#" I can skip it and I can use the os module to delete the path to the file#
+#  - I could also create a database specifically for the file names and have then linked...
+
 from NewUser import *
 from ExistingUser import *
 
 when = 0
 plates = 0
 calories = 0
-administratorID = 20019417  # By default this code will be 0000, but it should be changed for security
+administratorID = 0000  # By default this code will be 0000, but it should be changed for security
 
 print(red_bold(under_bold('\n-To navigate this program type the NUMBER next to the choice you want-')))
 input("*Press Enter*")
@@ -103,9 +112,14 @@ while True:
                         if overseer == 0:
                             allUsers = "SELECT * FROM userInfo"
                             info = read_table(connecting, allUsers)
-                            for data in info:
-                                print(f"\nPin Number: {data[0]} | First Name: {data[1]} |Last Name: {data[2]} | Gender: {data[3]} | Weight: {data[4]} | Height: {data[5]} " 
-                                      f"\nBMI: {data[6]} | Email: {data[7]} | Security Question: {data[8]} | Answer: {data[9]} | Goal: {data[10]} | Previous Day: {data[11]}")
+                            try:
+                                if info[0] is None:
+                                    int("#ForceFail")
+                                for data in info:
+                                    print(f"\nPin Number: {data[0]} | First Name: {data[1]} |Last Name: {data[2]} | Gender: {data[3]} | Weight: {data[4]} | Height: {data[5]} " 
+                                          f"\nBMI: {data[6]} | Email: {data[7]} | Security Question: {data[8]} | Answer: {data[9]} | Goal: {data[10]} | Previous Day: {data[11]}")
+                            except TypeError and IndexError:
+                                print("There is no info to read from that table")
 
                         elif overseer == 1:
                             delete = input(f"\nWhat is the {red_bold('PIN NUMBER')} of the account you wish to delete"

@@ -1,3 +1,14 @@
+# To delete a file
+# import os
+# if os.path.exists("testfile.txt"):
+#     os.remove("testfile.txt")
+# else:
+#     print("This file doesn't exist")
+
+# To remove a folder
+# os.rmdir("")
+
+
 class Fonts:
     purple = '\033[95m'
     cyan = '\033[96m'
