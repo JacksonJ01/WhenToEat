@@ -24,6 +24,10 @@
 # "\n6. 3pm  - 6pm" +   ///
 #  "\n7. 6pm  - 9pm" +   ////
 #  "\n8. 9pm  - 12am");  ////
+#
+# I might add an auto increment to the userInfo table because it will help me keep track of the users files better
+# - I can't make the file name the users name because names are not unique
+# - I can make the user Pin Number the file name, but the pin can be changed,#
 from NewUser import *
 from ExistingUser import *
 
