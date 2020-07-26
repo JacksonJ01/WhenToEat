@@ -15,7 +15,7 @@ def newUser():
           f"\nThis number can be as long as you'd like it to be, but there is also a {bold('minimum of 4 characters')}."
           f"\nShould you forget this pin number, the email you provide will serve as a means to help retrieve your pin"
           f"\nIf you do not remember the pin number nor the email you linked you can request the Administrator's help"
-          f"\n{bold('Press Enter')} when you are ready")
+          f"\n\n{bold('Press Enter')} when you are ready")
 
     allSet = False
     pinNumber = input("\nWhat would you like your Pin Number to be?"
@@ -37,13 +37,15 @@ def newUser():
                         pinNum = read_table(connecting, pin)
                         for pin in pinNum:
                             if pinNumber == pin[0]:
+                                waiting(2)
                                 print("\nLooks like someone has taken that Pin Number."
                                       "\nTry again")
                                 int("#Force Fail")
+                        waiting(3)
                         print("\nLooks like you're all set")
                         allSet = True
                         break
-                    except ValueError:
+                    except ValueError and TypeError:
                         int("#Another Force Fail")
             else:
                 print(f"\nYou need to enter a {red_bold('longer')} Pin Number")
@@ -71,7 +73,8 @@ def newUser():
             else:
                 int("#ForceFail")
         except ValueError:
-            secretQuestion = input(f"Type a {red_bold('number')} between 1 and 5 to pick a Security Question")
+            secretQuestion = input(f"Type a {red_bold('number')} between 1 and 5 to pick a Security Question"
+                                   f"\n>>>")
 
     answer = input("\nWhat is the answer to that question?"
                    "\n>>>").lower()
@@ -83,5 +86,12 @@ def newUser():
     VALUES
       ('{pinNumber}', '{firstName}', '{lastName}', 'N/A', 'N/A', 'N/A', 'N/A', '{email}', '{secretQuestion}', '{answer}', 'N/A', 'N/A')"""
     create_table(connecting, add_person)
+
+    createFile = f"""
+    INSERT INTO
+      userFileName (pinNumber)
+    VALUES
+      ('{pinNumber}')"""
+    create_table(connecting, createFile)
 
     return lastName

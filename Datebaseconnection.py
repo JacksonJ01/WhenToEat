@@ -38,10 +38,10 @@ def read_table(connection, query):
 
 
 # This variable holds the Person table
-person_table = """
+personTable = """
 CREATE TABLE IF NOT EXISTS 
   userInfo (
-  pinNumber      INTEGER  PRIMARY KEY,
+  pinNumber      INTEGER PRIMARY KEY,
   firstName      TEXT     NOT NULL,
   lastName       TEXT     NOT NULL,
   gender         TEXT,
@@ -56,5 +56,16 @@ CREATE TABLE IF NOT EXISTS
 );
 """
 
+userFileTable = """
+CREATE TABLE IF NOT EXISTS
+  userFileName (
+  fileName   INTEGER PRIMARY KEY AUTOINCREMENT,
+  pinNumber  INTEGER,
+  CONSTRAINT user_fk_fileAgain
+  FOREIGN KEY (pinNumber)
+  REFERENCES userInfo (pinNumber)
+);
+"""
 connecting = userDatabaseTest("userDatabaseTest")
-create_table(connecting, person_table)  # Adds the person table to the database
+create_table(connecting, personTable)  # Adds the person table to the database
+create_table(connecting, userFileTable)

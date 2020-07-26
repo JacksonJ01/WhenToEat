@@ -16,14 +16,15 @@
 # - Bulk
 # - Maintain
 #
-# "\n1. 12am - 3am" +   ////
-# "\n2. 3am  - 6am" +   //
-# "\n3. 6am  - 9am" +   //
-# "\n4. 9am  - 12pm" +  ///
-# "\n5. 12pm - 3pm" +   ///
-# "\n6. 3pm  - 6pm" +   ///
-#  "\n7. 6pm  - 9pm" +   ////
-#  "\n8. 9pm  - 12am");  ////
+#  -Instead of me asking the user what time of day it is, i can access the time through the computer
+#   - If it falls into the category...
+#    - 9pm - 12 am is the check in period
+#    - 12 am 7 am is the gray area
+#    - 7 am - 11 am is breakfast period
+#    - 11 am - 3 pm is the period
+#    - 3pm to 9 pm is the dinner period#
+#
+# - menu for existing users that will allow them to change the information they provided as a new user#
 #
 # I might add an auto increment to the userInfo table because it will help me keep track of the users files better
 # - I can't make the file name the users name because names are not unique
@@ -36,6 +37,9 @@
 #  - If I have a temporary variable in the loop that reads the file, I can add the names to it, but when it reaches the file
 #   - "User#" I can skip it and I can use the os module to delete the path to the file#
 #  - I could also create a database specifically for the file names and have then linked...
+# - The admin can delete the whole database, so i will also have to delete every file that exists for the users
+#  - I can delete the files that exist as I loop through the "userFileName" database
+#  - Then I can delete the whole database#
 
 from NewUser import *
 from ExistingUser import *
@@ -43,14 +47,28 @@ from ExistingUser import *
 when = 0
 plates = 0
 calories = 0
-administratorID = 0000  # By default this code will be 0000, but it should be changed for security
+administratorID = 2001  # By default this code will be 2001, but it should be changed for security
 
-print(red_bold(under_bold('\n-To navigate this program type the NUMBER next to the choice you want-')))
+print(red_bold(under_bold('-To navigate this program type the NUMBER next to the choice you want-')))
 input("*Press Enter*")
 
 # This is the main loop for this program
 # The menu consist the options that will allow the user to create their account in the the database and access that account
 # The admin will be able to view all of the users in the account and remove users if they need to. This can only be accessed with the adminID#
+
+try:
+    allUsers = "SELECT * FROM userInfo"
+    info = read_table(connecting, allUsers)
+    for inf in info:
+        print(inf)
+
+    allUsers = "SELECT * FROM userFileName"
+    info = read_table(connecting, allUsers)
+    for inf in info:
+        print(inf)
+except TypeError:
+    print()
+
 while True:
     menu0 = input("\nHello, are you a New User or an Existing User?"
                   "\n1. New User"
@@ -110,16 +128,16 @@ while True:
                                                  f"\n>>>")
 
                         if overseer == 0:
-                            allUsers = "SELECT * FROM userInfo"
-                            info = read_table(connecting, allUsers)
                             try:
+                                allUsers = "SELECT * FROM userInfo"
+                                info = read_table(connecting, allUsers)
                                 if info[0] is None:
-                                    int("#ForceFail")
+                                    int("#Force Fail")
                                 for data in info:
                                     print(f"\nPin Number: {data[0]} | First Name: {data[1]} |Last Name: {data[2]} | Gender: {data[3]} | Weight: {data[4]} | Height: {data[5]} " 
                                           f"\nBMI: {data[6]} | Email: {data[7]} | Security Question: {data[8]} | Answer: {data[9]} | Goal: {data[10]} | Previous Day: {data[11]}")
-                            except TypeError and IndexError:
-                                print("There is no info to read from that table")
+                            except ValueError and IndexError:
+                                print("\nThe database is currently empty")
 
                         elif overseer == 1:
                             delete = input(f"\nWhat is the {red_bold('PIN NUMBER')} of the account you wish to delete"
@@ -139,7 +157,14 @@ while True:
                             drop_table = """
                             DROP TABLE IF EXISTS
                               userInfo"""
+                            drop_again = """
+                            DROP TABLE IF EXISTS
+                              userFileName"""
+                            create_table(connecting, drop_again)
                             create_table(connecting, drop_table)
+
+                            create_table(connecting, personTable)
+                            create_table(connecting, userFileTable)
 
                         elif overseer == 3:
                             break
