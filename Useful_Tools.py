@@ -1,9 +1,12 @@
 # To delete a file
-# import os
-# if os.path.exists("testfile.txt"):
-#     os.remove("testfile.txt")
-# else:
-#     print("This file doesn't exist")
+import os
+
+
+def removeFile(filename):
+    if os.path.exists(f"{filename}.txt"):
+        os.remove(f"{filename}.txt")
+    else:
+        print(f"The file \"{filename}.txt\" does not exist")
 
 # To remove a folder
 # os.rmdir("")

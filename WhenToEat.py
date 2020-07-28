@@ -47,7 +47,7 @@ from ExistingUser import *
 when = 0
 plates = 0
 calories = 0
-administratorID = 2001  # By default this code will be 2001, but it should be changed for security
+administratorID = 20011002  # By default this code will be 20011002, but it should be changed for security
 
 print(red_bold(under_bold('-To navigate this program type the NUMBER next to the choice you want-')))
 input("*Press Enter*")
@@ -56,20 +56,21 @@ input("*Press Enter*")
 # The menu consist the options that will allow the user to create their account in the the database and access that account
 # The admin will be able to view all of the users in the account and remove users if they need to. This can only be accessed with the adminID#
 
-try:
-    allUsers = "SELECT * FROM userInfo"
-    info = read_table(connecting, allUsers)
-    for inf in info:
-        print(inf)
-
-    allUsers = "SELECT * FROM userFileName"
-    info = read_table(connecting, allUsers)
-    for inf in info:
-        print(inf)
-except TypeError:
-    print()
-
 while True:
+    try:
+        allUsers = "SELECT * FROM userInfo"
+        info = read_table(connecting, allUsers)
+        for inf in info:
+            print(inf)
+
+        allUsers = "SELECT * FROM userFileName"
+        info = read_table(connecting, allUsers)
+        for inf in info:
+            print(inf)
+
+    except TypeError:
+        print("No info in tables")
+
     menu0 = input("\nHello, are you a New User or an Existing User?"
                   "\n1. New User"
                   "\n2. Existing User"
@@ -96,10 +97,9 @@ while True:
 
     elif menu0 == 2:
         user = existingUser()
-        if user == 1:
-            newUser()
 
     elif menu0 == 3:
+        attempts = 3
         isAdmin = input("\nWhat is the Administrator ID?"
                         "\n>>>")
         while True:
@@ -149,19 +149,58 @@ while True:
                               pinNumber = {delete}
                             """
                             try:
-                                deleting = create_table(connecting, dropAccount)
+                                create_table(connecting, dropAccount)
+                            except Error:
+                                print("The database does not have a User linked the that Pin Number")
+                            try:
+                                deleteFile = f"""
+                                SELECT
+                                  fileName
+                                FROM
+                                  userFileName
+                                WHERE
+                                  pinNumber = {delete}"""
+                                file = read_table(connecting, deleteFile)
+                                for files in file:
+                                    file = files[0]
+                                removeFile(f"{file}")
                             except Error as welp:
                                 print(welp)
+
+                            deleteUserFile = f"""
+                            DELETE FROM
+                              userFileName
+                            WHERE
+                              pinNumber = {delete}
+                            """
+                            try:
+                                create_table(connecting, deleteUserFile)
+                            except Error:
+                                print("")
 
                         elif overseer == 2:
                             drop_table = """
                             DROP TABLE IF EXISTS
                               userInfo"""
+                            create_table(connecting, drop_table)
+
+                            getFileName = """
+                            SELECT 
+                              fileName
+                            FROM
+                              userFileName
+                            """
+                            try:
+                                file = read_table(connecting, getFileName)
+                                for currentFile in file:
+                                    removeFile(f"{currentFile[0]}")
+                            except TypeError and IndexError:
+                                print("\nThere are no File Names in this database")
+
                             drop_again = """
                             DROP TABLE IF EXISTS
                               userFileName"""
                             create_table(connecting, drop_again)
-                            create_table(connecting, drop_table)
 
                             create_table(connecting, personTable)
                             create_table(connecting, userFileTable)
@@ -172,13 +211,14 @@ while True:
                 else:
                     int("#ForceFail")
             except ValueError:
+                attempts -= 1
+                if attempts == 0:
+                    break
                 isAdmin = input(f"\n{red_bold('Incorrect PIN NUMBER')}"
+                                f"\n{red_bold(f'{attempts} attempt(s) left')}"
                                 "\nTry Again"
                                 "\n>>>")
 
     elif menu0 == 4:
         print("Have A Good Day")
         exit()
-
-    if user != 0:
-        print("")

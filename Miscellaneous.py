@@ -15,15 +15,15 @@ def waiting(number_of_dots):
 
 def secretQ(number=None):
     if number == 1:
-        return "\nWhat was a name you gave yourself growing up"
+        return "What was a name you gave yourself growing up"
     elif number == 2:
-        return "\nWhat was your favorite game as a child?"
+        return "What was your favorite game as a child?"
     elif number == 3:
-        return "\nWhere were you when you had your first kiss?"
+        return "Where were you when you had your first kiss?"
     elif number == 4:
-        return "\nWhat is the name of a college you applied to but didn't attend?"
+        return "What is the name of a college you applied to but didn't attend?"
     elif number == 5:
-        return "\n5. What planet would you like to live on?"
+        return "What planet would you like to live on?"
     else:
         print(
             f"\nWhich of these 5 questions would you like to answer? \n{red_bold('Make sure you provide a secure answer you can remember')}"
