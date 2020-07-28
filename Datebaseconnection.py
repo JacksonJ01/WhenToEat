@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS
   secretQuestion INTEGER  NOT NULL,
   answer         TEXT     NOT NULL,
   goal           TEXT,
-  previousDay    TEXT
+  dateTime       TEXT
 );
 """
 

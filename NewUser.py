@@ -84,9 +84,7 @@ def newUser():
             email = input("\nTry again"
                           "\n>>>")
 
-    print("Here")
     secretQ()
-    print("here")
     secretQuestion = input(">>>")
     while True:
         try:
@@ -102,12 +100,14 @@ def newUser():
     answer = input("\nWhat is the answer to that question?"
                    "\n>>>").lower()
 
+    dateTime = getDate()
+
     # This variable contains the string to add this new person using the variables
     add_person = f"""
     INSERT INTO
-      userInfo (pinNumber, firstName, lastName, gender, weight, height, bmi, email, secretQuestion, answer, goal, previousDay)
+      userInfo (pinNumber, firstName, lastName, gender, weight, height, bmi, email, secretQuestion, answer, goal, dateTime)
     VALUES
-      ('{pinNumber}', '{firstName}', '{lastName}', 'N/A', 'N/A', 'N/A', 'N/A', '{email}', '{secretQuestion}', '{answer}', 'N/A', 'N/A')"""
+      ('{pinNumber}', '{firstName}', '{lastName}', 'N/A', 'N/A', 'N/A', 'N/A', '{email}', '{secretQuestion}', '{answer}', 'N/A', '{dateTime}')"""
     create_table(connecting, add_person)
 
     createFile = f"""
@@ -142,7 +142,7 @@ EMAIL: {email}
 SECRET QUESTION: {sec}
 ANSWER: {answer}
 GOAL: N/A
-PREVIOUS DAY: N/A
+DATE TIME: {dateTime}
 \n""")
         create.close()
     except TypeError and IndexError:

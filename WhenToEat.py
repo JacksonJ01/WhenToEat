@@ -21,8 +21,11 @@
 #    - 9pm - 12 am is the check in period
 #    - 12 am 7 am is the gray area
 #    - 7 am - 11 am is breakfast period
-#    - 11 am - 3 pm is the period
-#    - 3pm to 9 pm is the dinner period#
+#    - 11 am - 3 pm is the lunch period
+#    - 3pm to 9 pm is the dinner period
+#
+#    update the previousday to hold the current date whenever the user logs in
+#    change the 0 to forgot or want to change#
 #
 # - menu for existing users that will allow them to change the information they provided as a new user#
 #
@@ -40,9 +43,8 @@
 # - The admin can delete the whole database, so i will also have to delete every file that exists for the users
 #  - I can delete the files that exist as I loop through the "userFileName" database
 #  - Then I can delete the whole database#
-
-from NewUser import *
 from ExistingUser import *
+from WTE import *
 
 when = 0
 plates = 0
@@ -57,20 +59,6 @@ input("*Press Enter*")
 # The admin will be able to view all of the users in the account and remove users if they need to. This can only be accessed with the adminID#
 
 while True:
-    try:
-        allUsers = "SELECT * FROM userInfo"
-        info = read_table(connecting, allUsers)
-        for inf in info:
-            print(inf)
-
-        allUsers = "SELECT * FROM userFileName"
-        info = read_table(connecting, allUsers)
-        for inf in info:
-            print(inf)
-
-    except TypeError:
-        print("No info in tables")
-
     menu0 = input("\nHello, are you a New User or an Existing User?"
                   "\n1. New User"
                   "\n2. Existing User"
@@ -88,15 +76,15 @@ while True:
             menu0 = input(f"\n{red_bold('Press 1')} if you are a New User"
                           f"\n{red_bold('Press 2')} if you are an Existing User"
                           f"\n{red_bold('Press 3')} if you are an Admin"
-                          f"\n{red_bold('Press 4')} if you want to Leave"
+                          f"\n{red_bold('Press 4')} if you want to Exit"
                           f"\n>>>")
 
     user = 0
     if menu0 == 1:
-        user = newUser()
+        wte(newUser())
 
     elif menu0 == 2:
-        user = existingUser()
+        wte(existingUser())
 
     elif menu0 == 3:
         attempts = 3
@@ -135,7 +123,7 @@ while True:
                                     int("#Force Fail")
                                 for data in info:
                                     print(f"\nPin Number: {data[0]} | First Name: {data[1]} |Last Name: {data[2]} | Gender: {data[3]} | Weight: {data[4]} | Height: {data[5]} " 
-                                          f"\nBMI: {data[6]} | Email: {data[7]} | Security Question: {data[8]} | Answer: {data[9]} | Goal: {data[10]} | Previous Day: {data[11]}")
+                                          f"\nBMI: {data[6]} | Email: {data[7]} | Security Question: {data[8]} | Answer: {data[9]} | Goal: {data[10]} | Last Login: {data[11]}")
                             except ValueError and IndexError:
                                 print("\nThe database is currently empty")
 

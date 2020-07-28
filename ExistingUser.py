@@ -11,11 +11,10 @@ def existingUser():
         pin = int(pin)
     except ValueError:
         print(f"\nPlease enter {red_bold('0, 1, or your PIN NUMBER')}")
-        existingUser()
+        return existingUser()
 
-    successful = 0
     if pin == 0:
-        while successful == 0:
+        while True:
             first_Name = input("\nWhat is your first name?"
                                "\n>>>").title()
             last_Name = input("\nWhat is your last name"
@@ -47,16 +46,15 @@ def existingUser():
                           "\nPlease try again")
                     return existingUser()
 
-                print("Hhere")
                 print(secretQ(sQ))
                 answer = input(">>>")
                 if answer == ans:
                     change = input(f"\nYour Pin Number is {red_bold(existingPin)}"
-                                   f"\nWould you like to change it?"
+                                   f"\nWould you like to change it? (Type Y or N)"
                                    f"\nY or N"
                                    f"\n>>>").title()
                     if change == 'Y':
-                        while successful == 0:
+                        while True:
                             change = input("\nWhat would you like to change your Pin Number to?"
                                            "\n>>>")
                             while True:
@@ -125,7 +123,6 @@ def existingUser():
                                     write = open(f"{updateFile}.txt", "w")
                                     write.write(update)
                                     write.close()
-                                    successful = False
                                 except TypeError and Error:
                                     print("")
 
@@ -166,7 +163,7 @@ def existingUser():
             if main != 1:
                 print("\nThe information you entered did not match with our records."
                       "\nPlease try again")
-        except Error:
+        except Error and TypeError:
             print("\nSomething went wrong..."
                   "\nPlease try again")
         finally:
@@ -174,4 +171,4 @@ def existingUser():
                 return last_Name
             return existingUser()
     else:
-        int("#ForceFail")
+        return existingUser()

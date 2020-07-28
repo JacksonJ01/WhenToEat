@@ -1,16 +1,4 @@
 from Useful_Tools import *
-from time import sleep
-
-
-# Shorter way to access the sleep method
-def s(seconds):
-    sleep(seconds)
-
-
-def waiting(number_of_dots):
-    for dots in range(1, number_of_dots + 1):
-        s(1)
-        print("." * dots)
 
 
 def secretQ(number=None):

@@ -1,5 +1,19 @@
-# To delete a file
+from time import sleep
 import os
+from datetime import datetime
+
+
+# Shorter way to access the sleep method
+def s(seconds):
+    sleep(seconds)
+
+
+def waiting(number_of_dots):
+    for dots in range(1, number_of_dots + 1):
+        s(1)
+        print("." * dots)
+
+# To delete a file
 
 
 def removeFile(filename):
@@ -39,3 +53,7 @@ def under_bold(make_bold):
 
 def blue_bold(make_bold):
     return f"{Fonts.bold}{Fonts.blue }{make_bold}{Fonts.end}"
+
+
+def getDate():
+    return datetime.now().strftime("%x at %H:%M")
