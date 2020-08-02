@@ -56,13 +56,13 @@ def newUser():
                               "\n>>>")
 
     firstName = input("\nNow, what is your First Name?"
-                      "\n>>>").title()
+                      "\n>>>").title().strip()
 
     lastName = input("\nAnd your Last Name?"
-                     "\n>>>").title()
+                     "\n>>>").title().strip()
 
     email = input("\nWhat email would you like to link to this program?"
-                  "\n>>>").lower()
+                  "\n>>>").lower().strip()
     while True:
         check = """
         SELECT
@@ -100,7 +100,7 @@ def newUser():
     answer = input("\nWhat is the answer to that question?"
                    "\n>>>").lower()
 
-    dateTime = getDate()
+    dateTime = getM_D_Y_H_M()
 
     # This variable contains the string to add this new person using the variables
     add_person = f"""
@@ -149,4 +149,4 @@ DATE TIME: {dateTime}
         print("\nSomething went wrong"
               "\nPlease Contact The Admin")
 
-    return lastName
+    return pinNumber

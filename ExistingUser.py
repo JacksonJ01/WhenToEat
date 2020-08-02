@@ -2,7 +2,7 @@ from NewUser import *
 
 
 def existingUser():
-    print(f"\n{red_bold('Press 0')} if you forgot your Pin Number"
+    print(f"\n{red_bold('Press 0')} if you forgot or want to change your Pin Number"
           f"\n{red_bold('Press 1')} if you do not have an account"
           f"\n{red_bold('Press 2')} to leave this screen")
     pin = input(f"\nEnter your {bold('Pin Number')}"
@@ -16,11 +16,11 @@ def existingUser():
     if pin == 0:
         while True:
             first_Name = input("\nWhat is your first name?"
-                               "\n>>>").title()
+                               "\n>>>").title().strip()
             last_Name = input("\nWhat is your last name"
-                              "\n>>>").title()
+                              "\n>>>").title().strip()
             email = input("\nWhat is the the email linked to your account?"
-                          "\n>>>").lower()
+                          "\n>>>").lower().strip()
 
             forgot = f"""
             SELECT
@@ -52,7 +52,7 @@ def existingUser():
                     change = input(f"\nYour Pin Number is {red_bold(existingPin)}"
                                    f"\nWould you like to change it? (Type Y or N)"
                                    f"\nY or N"
-                                   f"\n>>>").title()
+                                   f"\n>>>").title().strip()
                     if change == 'Y':
                         while True:
                             change = input("\nWhat would you like to change your Pin Number to?"
@@ -77,8 +77,11 @@ def existingUser():
                                 checking = read_table(connecting, checkPin)
                                 for check in checking:
                                     if check[0] == change:
+                                        waiting(2)
                                         print("\nThat Pin Number is taken, try again")
                                         int('#Force Fail')
+
+                                waiting(3)
                                 newPinNumber = f"""
                                 UPDATE
                                   userInfo
@@ -142,9 +145,9 @@ def existingUser():
 
     elif len(str(pin)) >= 4:
         first_Name = input("\nOkay, what is your first name?"
-                           "\n>>>").title()
+                           "\n>>>").title().strip()
         last_Name = input("\nWhat is your last name"
-                          "\n>>>").title()
+                          "\n>>>").title().strip()
         pinNumCheck = f"""
         SELECT 
           firstName, lastName
@@ -168,7 +171,7 @@ def existingUser():
                   "\nPlease try again")
         finally:
             if main == 1:
-                return last_Name
+                return pin
             return existingUser()
     else:
         return existingUser()

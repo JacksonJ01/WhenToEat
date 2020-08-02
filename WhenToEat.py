@@ -79,7 +79,6 @@ while True:
                           f"\n{red_bold('Press 4')} if you want to Exit"
                           f"\n>>>")
 
-    user = 0
     if menu0 == 1:
         wte(newUser())
 

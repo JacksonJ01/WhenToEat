@@ -1,6 +1,11 @@
 from time import sleep
 import os
 from datetime import datetime
+from random import randint
+
+
+def r(minimum, maximum):
+    return randint(minimum, maximum)
 
 
 # Shorter way to access the sleep method
@@ -13,9 +18,12 @@ def waiting(number_of_dots):
         s(1)
         print("." * dots)
 
+
+def getM_D_Y_H_M():
+    return datetime.now().strftime("%x at %H:%M")
+
+
 # To delete a file
-
-
 def removeFile(filename):
     if os.path.exists(f"{filename}.txt"):
         os.remove(f"{filename}.txt")
@@ -53,7 +61,3 @@ def under_bold(make_bold):
 
 def blue_bold(make_bold):
     return f"{Fonts.bold}{Fonts.blue }{make_bold}{Fonts.end}"
-
-
-def getDate():
-    return datetime.now().strftime("%x at %H:%M")
